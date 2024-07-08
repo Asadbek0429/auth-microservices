@@ -44,7 +44,7 @@ class AuthViewSet(ViewSet):
         responses={200: 'Token is correct'},
         tags=['Service']
     )
-    def verify(self, request, *args, **kwargs):
+    def check(self, request, *args, **kwargs):
         data = request.data
         service = SSOToken.objects.filter(token=data.get('token'), deleted_at__isnull=True).first()
         if not service:
