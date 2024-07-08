@@ -34,8 +34,8 @@ class AuthViewSet(ViewSet):
         return Response(data={'token': token.token, 'ok': True}, status=status.HTTP_200_OK)
 
     @swagger_auto_schema(
-        operation_description="Verify token",
-        operation_summary="Verify token",
+        operation_description="Check token",
+        operation_summary="Check token",
         request_body=openapi.Schema(
             type=openapi.TYPE_OBJECT,
             required=['token'],
