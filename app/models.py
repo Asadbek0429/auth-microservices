@@ -9,6 +9,9 @@ class Services(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return self.name
+
 
 class SSOToken(models.Model):
     service = models.ForeignKey(Services, on_delete=models.CASCADE)
@@ -18,3 +21,6 @@ class SSOToken(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.service.name
