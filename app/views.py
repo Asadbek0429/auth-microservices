@@ -15,8 +15,8 @@ class AuthViewSet(ViewSet):
         request_body=openapi.Schema(
             type=openapi.TYPE_OBJECT,
             required=['id', 'name', 'secret_key'],
-            properties={'id': openapi.Schema(type=openapi.TYPE_INTEGER, title='Service id'),
-                        'name': openapi.Schema(type=openapi.TYPE_STRING, title='Service name'),
+            properties={'service_id': openapi.Schema(type=openapi.TYPE_INTEGER, title='Service id'),
+                        'service_name': openapi.Schema(type=openapi.TYPE_STRING, title='Service name'),
                         'secret_key': openapi.Schema(type=openapi.TYPE_STRING, title='secret_key')}
         ),
         responses={200: 'Token'},
@@ -24,7 +24,7 @@ class AuthViewSet(ViewSet):
     )
     def login(self, request, *args, **kwargs):
         data = request.data
-        service = Services.objects.filter(id=data.get('id'), name=data.get('name'),
+        service = Services.objects.filter(id=data.get('service_id'), name=data.get('service_name'),
                                           secret_key=data.get('secret_key')).first()
         if not service:
             return Response(data={'error': 'Service name or secret_key is incorrect', 'ok': False},
